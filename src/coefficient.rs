@@ -22,6 +22,10 @@ impl ops::AddAssign for Coefficient{
         else {
             self.value -= _rhs.value;
         }
+        if self.value < 0 {
+            self.value *= -1;
+            self.sign = opposite_sign(self.sign, true);
+        }
     }
 }
 
@@ -30,7 +34,7 @@ fn opposite_sign(sign : char,  is_inversed : bool) -> char {
         match sign {
             '-' => '+',
             '+' => '-',
-            _ => panic!(),
+            _ => panic!("Bad argument to opposite_sign"),
         }
 
     }
@@ -72,6 +76,7 @@ pub fn convert_in_coeff_list(tokens: &[Token]) -> Vec<Coefficient> {
             continue;
         }
         coeff = create_coeff(&mut tokens_iter, sign_is_inverted);
+        
         let present = list_coeff.binary_search_by_key(&coeff.power, |a| a.power);
         match present {
             Ok(t) => {list_coeff[t] += coeff;

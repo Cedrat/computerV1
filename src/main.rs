@@ -13,18 +13,15 @@ use crate::coefficient::convert_in_coeff_list;
 use crate::resolve::resolve_equation;
 
 fn print_factorised(coeffs : &[Coefficient]) -> bool {
+    if coeffs.is_empty() {
+        println!("Infinite number of solutions");
+        return false;
+    }
     print!("Reduced form: ");
     for coeff in coeffs {
         print!("{} ", coeff);
     }
     println!("= 0");
-    let max_power = coeffs.last().unwrap().power;
-    println!("Polynomial degree: {}", max_power);
-    if max_power > 2
-    {
-        println!("The polynomial degree is stricly greater than 2, I can't solve.");
-        return false;
-    }
     true
 }
 fn main()  {
@@ -39,7 +36,7 @@ fn main()  {
 
     let mut check_syntax = CheckerSyntax::new() ;
     if !check_syntax.verify_syntax(&list_tokens) {
-        println!("Bad Syntax");
+        eprintln!("Bad Syntax");
         return ;
     }
     let coeffs = convert_in_coeff_list(&list_tokens);
