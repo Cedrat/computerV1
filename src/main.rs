@@ -17,11 +17,14 @@ fn print_factorised(coeffs : &[Coefficient]) -> bool {
         println!("Infinite number of solutions");
         return false;
     }
+    
     print!("Reduced form: ");
+    let mut reduced_form = String::new();
     for coeff in coeffs {
-        print!("{} ", coeff);
+        reduced_form += &coeff.to_string();
+        reduced_form += " "; 
     }
-    println!("= 0");
+    println!("{} = 0", reduced_form.trim_matches(|x| x == '+' || x == ' '));
     true
 }
 fn main()  {

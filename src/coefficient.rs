@@ -14,6 +14,8 @@ impl fmt::Display for Coefficient {
     }
 }
 
+
+
 impl ops::AddAssign for Coefficient{
     fn add_assign(&mut self, _rhs: Coefficient) {
         if self.sign == _rhs.sign {
