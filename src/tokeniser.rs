@@ -68,7 +68,7 @@ impl CheckerSyntax {
         let token = &tokens_iter.next();
         
         if token.is_none() {
-            return true;
+            return self.is_equality;
         }
         let token = &token.unwrap().type_arg;
         
@@ -114,7 +114,7 @@ impl CheckerSyntax {
         let token = &tokens_iter.next();
         
         if token.is_none() {
-            return true;
+            return self.is_equality;
         }
         let token = &token.unwrap().type_arg;
 
