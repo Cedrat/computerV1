@@ -5,24 +5,14 @@ fn type_token(token: &str) -> &str {
 
     let regex_number: regex::Regex = Regex::new("^[0-9]+.?[0-9]*+$").unwrap();
     let regex_power: regex::Regex = Regex::new("^X\\^[0-9]+$").unwrap();
-
-    if token == "*" {
-        MULTIPLY
-    }
-    else if token == "-" || token == "+" {
-        SIGN
-    }
-    else if token == "=" {
-        EQUALITY
-    }
-    else if regex_number.is_match(token) {
-        NUMBER
-    }
-    else if regex_power.is_match(token) {
-        POWER
-    }
-    else {
-        "UNDEFINED"
+    
+    match token {
+        "*" => MULTIPLY,
+        "-" | "+" => SIGN,
+        "=" => EQUALITY,
+        token if regex_number.is_match(token) => NUMBER,
+        token if regex_power.is_match(token) => POWER,
+        _ => "UNDEFINED",
     }
 }
 
