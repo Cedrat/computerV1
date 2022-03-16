@@ -24,14 +24,19 @@ fn resolve_equation_second_degree(coeffs : Vec<Coefficient>) {
     let c = get_coefficients_by_power_value(&coeffs, 0);
 
     let delta:f64 = b * b - 4.0 * a * c;
-    if delta == 0.0 {
+    println!("Delta = {}", delta);
+    if delta < 0.0 {
+        println!("No solution.");
+
+    }
+    else if delta == 0.0 {
         eprintln!("a = {} b = {} c = {}", a, b,c);
         println!("The solution is {}" , (-b)/(2.0 * a));
     }
-    if delta > 0.0 {
+    else if delta > 0.0 {
         let sol1 = (-b - delta.sqrt())/(2.0 * a);
         let sol2 = (-b + delta.sqrt())/(2.0 * a);
-        println!("The two solutions are [Think to create sqrt fct]:\n Solution 1 = {}\n Solution 2 = {}", sol1, sol2);
+        println!("The two solutions are :\n Solution 1 = {}\n Solution 2 = {}", sol1, sol2);
     }
 }
 

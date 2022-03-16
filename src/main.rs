@@ -5,6 +5,7 @@ pub mod token;
 pub mod coefficient;
 pub mod facto;
 pub mod resolve;
+pub mod sqrt;
 use coefficient::Coefficient;
 
 use crate::tokeniser::create_dict_token;
