@@ -3,8 +3,9 @@
 
 pub fn my_sqrt(to_root: f64) -> f64 {
     let mut approximative_nb = to_root/10.0;
-    let iterations = 38;
-    for _i in 0..iterations {
+    let mut previous_approximative_nb = to_root;
+    while approximative_nb != previous_approximative_nb {
+        previous_approximative_nb = approximative_nb;
         approximative_nb = (approximative_nb + to_root / approximative_nb) / 2.0;
     }
     approximative_nb

@@ -1,5 +1,6 @@
 
 use crate::Coefficient;
+use crate::sqrt::my_sqrt;
 
 fn get_coefficients_by_power_value(coeffs : &[Coefficient], value_power: u32) -> f64 {
     let value = coeffs.binary_search_by_key(&value_power, |b| b.power);
@@ -30,12 +31,11 @@ fn resolve_equation_second_degree(coeffs : Vec<Coefficient>) {
 
     }
     else if delta == 0.0 {
-        eprintln!("a = {} b = {} c = {}", a, b,c);
         println!("The solution is {}" , (-b)/(2.0 * a));
     }
     else if delta > 0.0 {
-        let sol1 = (-b - delta.sqrt())/(2.0 * a);
-        let sol2 = (-b + delta.sqrt())/(2.0 * a);
+        let sol1 = (-b - my_sqrt(delta))/(2.0 * a);
+        let sol2 = (-b + my_sqrt(delta))/(2.0 * a);
         println!("The two solutions are :\n Solution 1 = {}\n Solution 2 = {}", sol1, sol2);
     }
 }
