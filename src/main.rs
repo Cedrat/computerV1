@@ -3,7 +3,6 @@ use std::env;
 mod tokeniser;
 pub mod token;
 pub mod coefficient;
-pub mod facto;
 pub mod resolve;
 pub mod sqrt;
 use coefficient::Coefficient;
