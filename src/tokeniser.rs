@@ -50,6 +50,7 @@ impl CheckerSyntax {
 
         match token as &str {
             NUMBER=> self.after_number(tokens_iter),
+            SIGN => self.after_sign(tokens_iter),
             _ => false,
         }
     }
@@ -109,9 +110,7 @@ impl CheckerSyntax {
         let token = &token.unwrap().type_arg;
 
         match token as &str {
-            SIGN => self.after_sign(tokens_iter),
             MULTIPLY => self.after_multiply(tokens_iter),
-            EQUALITY => self.after_equality(tokens_iter),
             _ => false,
         }
     }

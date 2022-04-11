@@ -4,7 +4,7 @@ use std::ops;
 
 pub struct Coefficient {
     pub sign: char,
-    pub value : i64,
+    pub value : f64,
     pub power: u32,
 }
 
@@ -24,8 +24,8 @@ impl ops::AddAssign for Coefficient{
         else {
             self.value -= _rhs.value;
         }
-        if self.value < 0 {
-            self.value *= -1;
+        if self.value < 0.0 {
+            self.value *= -1.0;
             self.sign = opposite_sign(self.sign, true);
         }
     }
@@ -46,7 +46,7 @@ fn opposite_sign(sign : char,  is_inversed : bool) -> char {
 }
 
 fn create_coeff<'a>(tokens_iter: &mut impl Iterator<Item = &'a Token>, sign_is_inverted: bool) -> Coefficient {
-    let mut coeff = Coefficient { sign: opposite_sign('+', sign_is_inverted), value: 0, power: 0};
+    let mut coeff = Coefficient { sign: opposite_sign('+', sign_is_inverted), value: 0.0, power: 0};
     loop{
         let token = tokens_iter.next();
         if token.is_none() {
@@ -55,7 +55,7 @@ fn create_coeff<'a>(tokens_iter: &mut impl Iterator<Item = &'a Token>, sign_is_i
         let token = token.unwrap();
         match &token.type_arg as &str {
             SIGN => coeff.sign = opposite_sign(token.arg.chars().next().unwrap(), sign_is_inverted),
-            NUMBER => coeff.value = token.arg.parse().unwrap(),
+            NUMBER => coeff.value = token.arg.parse::<f64>().unwrap(),
             POWER =>  {coeff.power = token.arg.split('^').nth(1).unwrap().parse::<u32>().unwrap(); break;}
             MULTIPLY => (),
             _ => break,
@@ -82,7 +82,7 @@ pub fn convert_in_coeff_list(tokens: &[Token]) -> Vec<Coefficient> {
         let present = list_coeff.binary_search_by_key(&coeff.power, |a| a.power);
         match present {
             Ok(t) => {list_coeff[t] += coeff;
-            if list_coeff[t].value == 0 {
+            if list_coeff[t].value == 0.0 {
                 list_coeff.remove(t);
             }},
             Err(_e) => list_coeff.push(coeff),

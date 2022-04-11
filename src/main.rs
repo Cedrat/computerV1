@@ -21,8 +21,10 @@ fn print_factorised(coeffs : &[Coefficient]) -> bool {
     print!("Reduced form: ");
     let mut reduced_form = String::new();
     for coeff in coeffs {
-        reduced_form += &coeff.to_string();
-        reduced_form += " "; 
+        if coeff.value != 0.0 {
+            reduced_form += &coeff.to_string();
+            reduced_form += " "; 
+        }
     }
     println!("{} = 0", reduced_form.trim_matches(|x| x == '+' || x == ' '));
     true
